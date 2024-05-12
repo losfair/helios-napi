@@ -1,15 +1,18 @@
 {
-  "name": "helios-darwin-x64",
-  "version": "0.0.0",
+  "name": "@losfair-v2/helios-napi-darwin-x64",
+  "repository": {
+    "url": "https://github.com/losfair/helios-napi"
+  },
+  "version": "0.1.0",
   "os": [
     "darwin"
   ],
   "cpu": [
     "x64"
   ],
-  "main": "helios.darwin-x64.node",
+  "main": "helios-napi.darwin-x64.node",
   "files": [
-    "helios.darwin-x64.node"
+    "helios-napi.darwin-x64.node"
   ],
   "license": "MIT",
   "engines": {
