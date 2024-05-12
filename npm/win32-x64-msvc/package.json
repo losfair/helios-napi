@@ -1,0 +1,17 @@
+{
+  "name": "@losfair-v2/helios-napi-win32-x64-msvc",
+  "repository": {
+    "url": "https://github.com/losfair/helios-napi"
+  },
+  "version": "0.1.0",
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  }
+}
