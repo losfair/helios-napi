@@ -1,3 +1,3 @@
-# `helios-darwin-x64`
+# `helios-napi-darwin-x64`
 
-This is the **x86_64-apple-darwin** binary for `helios`
+This is the **x86_64-apple-darwin** binary for `helios-napi`

@@ -1,8 +1,10 @@
-use std::str::FromStr;
+use std::{str::FromStr, sync::Mutex};
 
+use bytes::Bytes;
 use ethers::types::{H160, U256};
 use helios_common::types::BlockTag;
 use helios_consensus::database::{ConfigDB, Database, FileDB};
+use helios_execution::types::CallOpts;
 use napi::bindgen_prelude::{BigInt, FromNapiValue, ToNapiValue, Uint8Array};
 
 #[derive(Clone)]
@@ -151,6 +153,7 @@ impl ToNapiValue for EthU256Output {
   }
 }
 
+#[derive(Copy, Clone)]
 #[napi(js_name = "BlockTag")]
 pub struct JsBlockTag(pub(crate) BlockTag);
 
@@ -175,5 +178,53 @@ impl JsBlockTag {
       ));
     }
     Ok(Self(BlockTag::Number(value)))
+  }
+}
+
+#[napi(js_name = "CallOpts")]
+pub struct JsCallOpts(pub(crate) Mutex<CallOpts>);
+
+#[napi]
+impl JsCallOpts {
+  #[napi(constructor)]
+  pub fn construct() -> Self {
+    Self(Mutex::new(CallOpts {
+      from: None,
+      to: None,
+      gas: None,
+      gas_price: None,
+      value: None,
+      data: None,
+    }))
+  }
+
+  #[napi(ts_args_type = "address: string | Uint8Array")]
+  pub fn set_from(&self, address: EthAddress) {
+    self.0.lock().unwrap().from = Some(address.0);
+  }
+
+  #[napi(ts_args_type = "address: string | Uint8Array")]
+  pub fn set_to(&self, address: EthAddress) {
+    self.0.lock().unwrap().to = Some(address.0);
+  }
+
+  #[napi(ts_args_type = "gas: string | bigint")]
+  pub fn set_gas(&self, gas: EthU256Input) {
+    self.0.lock().unwrap().gas = Some(gas.0);
+  }
+
+  #[napi(ts_args_type = "gas_price: string | bigint")]
+  pub fn set_gas_price(&self, gas_price: EthU256Input) {
+    self.0.lock().unwrap().gas_price = Some(gas_price.0);
+  }
+
+  #[napi(ts_args_type = "value: string | bigint")]
+  pub fn set_value(&self, value: EthU256Input) {
+    self.0.lock().unwrap().value = Some(value.0);
+  }
+
+  #[napi]
+  pub fn set_data(&self, data: Uint8Array) {
+    self.0.lock().unwrap().data = Some(ethers::types::Bytes(Bytes::copy_from_slice(&data[..])));
   }
 }

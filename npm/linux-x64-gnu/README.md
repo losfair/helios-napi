@@ -1,3 +1,3 @@
-# `helios-linux-x64-gnu`
+# `helios-napi-linux-x64-gnu`
 
-This is the **x86_64-unknown-linux-gnu** binary for `helios`
+This is the **x86_64-unknown-linux-gnu** binary for `helios-napi`

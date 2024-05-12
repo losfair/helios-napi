@@ -1,16 +1,19 @@
 {
-  "name": "helios",
-  "version": "0.0.0",
+  "name": "@losfair-v2/helios-napi",
+  "version": "0.1.0",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
-    "name": "helios",
+    "name": "helios-napi",
     "triples": {}
   },
   "license": "MIT",
   "devDependencies": {
+    "@ensdomains/ensjs": "^3.7.0",
     "@napi-rs/cli": "^2.18.3",
-    "ava": "^6.0.1"
+    "ava": "^6.0.1",
+    "ethers": "^6.12.1",
+    "viem": "^2.10.3"
   },
   "ava": {
     "timeout": "3m"
