@@ -1,2 +1,3 @@
 # helios-napi
-Node/Deno bindings for Helios
+
+NAPI bindings for [Helios](https://github.com/a16z/helios)

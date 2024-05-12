@@ -1,0 +1,33 @@
+[package]
+edition = "2021"
+name = "helios"
+version = "0.0.0"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
+napi = { version = "2.12.2", default-features = false, features = ["napi6", "async", "error_anyhow"] }
+napi-derive = "2.12.2"
+tokio = { version = "1", features = ["full"] }
+futures = "0.3"
+anyhow = "1"
+eyre = "0.6"
+hex = "0.4"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+ethers = { git = "https://github.com/gakonst/ethers-rs", rev = "3bf1a9e0d698e9fdfc91d0353878901af5a5c5ef" }
+helios-common = { package = "common", git = "https://github.com/a16z/helios", rev = "1572a24c1e08386f46bfe16d1d7c2203248ef7ef" }
+helios-config = { package = "config", git = "https://github.com/a16z/helios", rev = "1572a24c1e08386f46bfe16d1d7c2203248ef7ef" }
+helios-client = { package = "client", git = "https://github.com/a16z/helios", rev = "1572a24c1e08386f46bfe16d1d7c2203248ef7ef" }
+helios-consensus = { package = "consensus", git = "https://github.com/a16z/helios", rev = "1572a24c1e08386f46bfe16d1d7c2203248ef7ef" }
+helios-execution = { package = "execution", git = "https://github.com/a16z/helios", rev = "1572a24c1e08386f46bfe16d1d7c2203248ef7ef" }
+
+[build-dependencies]
+napi-build = "2.0.1"
+
+[profile.release]
+lto = true
+strip = "symbols"
